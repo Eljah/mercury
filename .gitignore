@@ -1,0 +1,7 @@
+target/
+.pio/
+build/
+*.log
+readings.jsonl
+__pycache__/
+

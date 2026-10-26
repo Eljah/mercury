@@ -1,0 +1,23 @@
+[Unit]
+Description=Mercury 200 GPIO UART read-only LAN service
+After=network.target
+
+[Service]
+Type=simple
+User=mercury
+Group=mercury
+SupplementaryGroups=dialout
+WorkingDirectory=/opt/mercury-pi
+ExecStart=/usr/bin/java -jar /opt/mercury-pi/mercury-pi.jar --config /etc/mercury-pi/config.properties
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+UMask=0077
+# Do not enable PrivateDevices: the process needs the configured UART device.
+# jSerialComm extracts its ARM native library into the private /tmp directory.
+
+[Install]
+WantedBy=multi-user.target
